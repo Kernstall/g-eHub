@@ -2,6 +2,7 @@
   "name": "g-ehub",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://kernstall.github.io/g-eHub",
   "dependencies": {
     "@babel/core": "7.1.6",
     "@svgr/webpack": "2.4.1",
@@ -12,6 +13,7 @@
     "babel-plugin-named-asset-import": "^0.3.0",
     "babel-preset-react-app": "^7.0.0",
     "bfj": "6.1.1",
+    "bootstrap": "^4.2.1",
     "case-sensitive-paths-webpack-plugin": "2.1.2",
     "chalk": "2.4.1",
     "css-loader": "1.0.0",
@@ -44,6 +46,7 @@
     "react-app-polyfill": "^0.2.0",
     "react-dev-utils": "^7.0.1",
     "react-dom": "^16.7.0",
+    "react-parallax-mousemove": "^1.1.0",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-with-styles": "^3.2.1",
@@ -59,6 +62,8 @@
     "workbox-webpack-plugin": "3.6.3"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js"
