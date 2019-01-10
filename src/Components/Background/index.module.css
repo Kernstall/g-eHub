@@ -1,0 +1,13 @@
+.starsLayout {
+    background-image: url(../../space.png);
+    -webkit-animation: parallaxAnimation 100s linear infinite;
+    animation: parallaxAnimation 100s linear infinite;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    position: fixed;
+}
+
+.test {
+    width: 100%;
+}
