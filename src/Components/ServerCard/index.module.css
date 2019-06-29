@@ -1,0 +1,18 @@
+.title {
+    display: inline-block;
+}
+.collapse {
+    margin-left: 24px;
+    width: 1rem;
+    height: 1rem;
+}
+.titleContainer{
+    display: flex;
+    justify-content: space-between;
+}
+.collapseWrapper {
+    margin-bottom: 1rem;
+}
+.playButton{
+    width: 100%;
+}

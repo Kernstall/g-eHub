@@ -4,48 +4,95 @@ import React, { Component } from 'react';
 //import ParallaxMousemove from 'react-parallax-mousemove'
 
 import style from './index.module.css';
+import { TweenMax, Expo } from "gsap/TweenMax";
+import $ from 'jquery'
+import MobileDetect from 'mobile-detect'
+
+import styles from './parallax.css'
 
 //<div className={ style.starsLayout }/>
 
 class Background extends Component {
-    render(){
-      /*const styles = {
-        outter: {
-          backgroundSize: 'cover',
-          width:'100%',
-          height: '100%',
-          position: 'absolute',
-          overflow: 'hidden',
-          'z-index': -1,
-        },
-        bgLayerStyle: {
-          position: 'absolute',
-          height: '100%',
-          transform: 'translate(-15%, 17%)',
-        }
-      };*/
 
+  constructor(){
+    super();
+    let md = new MobileDetect(window.navigator.userAgent);
+
+    this.state = {
+      isMobile: md.mobile()
+
+    }
+  }
+
+  componentDidMount() {
+    var $layer_0 = $('.layer-0'),
+        $layer_1 = $('.layer-1'),
+        $layer_2 = $('.layer-2'),
+        $container = $('body'),
+        container_w = $container.width(),
+        container_h = $container.height();
+
+    $(window).on('mousemove.parallax', function(event) {
+      var pos_x = event.pageX,
+          pos_y = event.pageY,
+          left  = 0,
+          top   = 0;
+
+      left = container_w / 2 - pos_x;
+      top  = container_h / 2 - pos_y;
+
+      TweenMax.to(
+          $layer_2,
+          1,
+          {
+            css: {
+              transform: 'translateX(' + left / 2 + 'px) translateY(' + top / 2 + 'px)'
+            },
+            ease:Expo.easeOut,
+            overwrite: 'all'
+          });
+
+      TweenMax.to(
+          $layer_1,
+          1,
+          {
+            css: {
+              transform: 'translateX(' + left / 4 + 'px) translateY(' + top / 2 + 'px)'
+            },
+            ease:Expo.easeOut,
+            overwrite: 'all'
+          });
+
+      TweenMax.to(
+          $layer_0,
+          10,
+          {
+            css: {
+              transform: 'rotate(' + left / 200 + 'deg)'
+            },
+            ease: Expo.easeOut,
+            overwrite: 'none'
+          }
+      )
+    });
+  }
+
+  render(){
         return (
-            <div className={ style.starsLayout }/>
+            <div className={ style.starsLayout }>
+              {
+                !this.state.isMobile ?
+                    <div id="planet-2" className="planet layer-2"/> :
+                    null
+              }
+              {
+                !this.state.isMobile ?
+                    <div id="planet-1" className="planet layer-1"/> :
+                    null
+              }
+            </div>
         );
     }
 }
-
-/* return (
-            <div>
-              <ParallaxMousemove containerStyle={styles.outter} fullHeight={true}>
-                <ParallaxMousemove.Layer layerStyle={styles.bgLayerStyle} config={{
-                  xFactor: 0.05,
-                  yFactor: 0,
-                  springSettings: {
-                    stiffness: 1000,
-                    damping: 30
-                  }
-                }}>
-                  <img src={require('../../space2.jpg')} alt="Parallax Layer"/>
-                </ParallaxMousemove.Layer>
-              </ParallaxMousemove>
-            </div>
-        );*/
 
 export default Background;

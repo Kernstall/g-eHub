@@ -1,11 +1,14 @@
 .mainGrid {
     display: grid;
     grid-template-columns: 250px auto auto;
-    grid-gap: 1em;
-    margin: 150px auto 0;
+    grid-gap: 0.5em;
+    margin: 150px auto 150px;
     background-color: white;
     max-width: 1000px;
     background-color:rgba(0, 0, 0, 0);
+    z-index: 5;
+    overflow: auto;
+    position: relative;
 }
 
 .headerGridItem {
@@ -21,23 +24,24 @@
 }
 
 .serverCard:not(:last-child) {
-    margin-bottom: 20px;
+    margin-bottom: 0.5em;
 }
 
-.newsContainer {
-    grid-column: 2 / 4;
+.highlightContainer {
+    grid-column: 2 / 4;/*
+    grid-row-start: 2;
+    grid-row-end: 4;*/
     background-color: gray;
-    min-height: 500px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 812px) {
     .mainGrid{
         margin: 0 auto 0;
     }
     .cardContainer{
         display: none
     }
-    .newsContainer {
+    .highlightContainer {
          grid-column: 1 / 4;
      }
 
