@@ -12,27 +12,34 @@ class MainPage extends Component {
 
   constructor(){
     super();
+    this.socket = new WebSocket(`ws://localhost:3000/g-eHub/ws`);
+    //this.socket = new WebSocket(`wss://${ window.location.host }/g-eHub/ws`);
+
+    this.socket.addEventListener('message', (event) => {/*
+      console.log(event);*/
+      const data = JSON.parse(event.data);
+      this.setState({ cardMock: data });
+      /*if(data.type === 'pop') {
+        console.log(data.message);
+        this.setState({ population: data.message });
+      } else {
+        this.addMessage(JSON.parse(event.data));
+      }*/
+    });
+
     this.state = {
-      cardMock: [
-        {
-          name: 'Gamma Station',
-          players: 60,
-          map: 'NFS Gamma',
-          descr: 'Сервер классической станции со своим билдом.',
-          discord: 'https://discord.gg/V92ZHwY',
-          gameLink: 'byond://5.9.12.156:2507'
-        },
-        {
-          name: 'Eris Station',
-          players: 60,
-          map: 'CEV Eris',
-          descr: 'Сервер с уникальной графикой, картой и лором, стремящийся создать нечто новое на основе нашей старой игры.',
-          discord: 'https://discord.gg/CTW9A3Y',
-          gameLink: 'byond://5.9.12.156:2511'
-        }
-      ]
+      cardMock: {},
+      openedKey: ''
     }
   }
+
+  componentWillUnmount() {
+    this.socket.close();
+  }
+
+  onCollapseOpen = (key) => {
+
+  };
 
   render(){
 
@@ -42,7 +49,7 @@ class MainPage extends Component {
             <Header/>
           </div>
           <div className={ style.cardContainer }>
-            { this.state.cardMock.map(element => (<div className={ style.serverCard }><ServerCard data={ element }/></div>)) }
+            { Object.entries(this.state.cardMock).map(([key, value]) => (<div className={ style.serverCard }><ServerCard collapsed = { this.state.openedKey === key } onCollapseOpen = { () => this.setState({ openedKey: key === this.state.openedKey ? '' : key }) } data={ value }/></div>)) }
           </div>
           <div className={ style.highlightContainer }>
             <MainPageCarousel></MainPageCarousel>

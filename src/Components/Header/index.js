@@ -30,13 +30,13 @@ export default class Header extends React.Component {
     return (
         <div>
           <Navbar color="light" light expand="sm">
-            <NavbarBrand href="/">g-eHub</NavbarBrand>
+            <NavbarBrand href="/g-eHub">g-eHub</NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 <NavItem>
                   <NavLink href="https://github.com/Kernstall/g-eHub">GitHub</NavLink>
-                </NavItem>
+                </NavItem>{/*
                 <UncontrolledDropdown nav inNavbar>
                   <DropdownToggle nav caret>
                     Баны
@@ -49,7 +49,7 @@ export default class Header extends React.Component {
                       Режим админ
                     </DropdownItem>
                   </DropdownMenu>
-                </UncontrolledDropdown>
+                </UncontrolledDropdown>*/}
               </Nav>
             </Collapse>
           </Navbar>

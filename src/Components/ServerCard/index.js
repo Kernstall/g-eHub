@@ -13,6 +13,12 @@ class ServerCard extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if(this.props.collapsed !== this.state.collapsed) {
+      this.setState({ collapsed: this.props.collapsed });
+    }
+  }
+
   render(){
     const data = this.props.data;
     return (
@@ -23,18 +29,18 @@ class ServerCard extends React.Component {
               <div className={ style.titleContainer }>{/*
                 <img src={ 'https://ss13.ru/img/Server_6.svg' } />*/}
                 <CardTitle className={ style.title }>{ data.name }</CardTitle>
-                <span className={ style.collapse } onClick={ ()=> this.setState({ collapsed: !this.state.collapsed }) }>
+                <span className={ style.collapse } onClick={ ()=> { this.props.onCollapseOpen(); this.setState({ collapsed: !this.state.collapsed }); } }>
                   <i className={ !this.state.collapsed ? "fas fa-arrow-down" : "fas fa-arrow-up" }></i>
                 </span>
               </div>
-              <Collapse className={ style.collapseWrapper } isOpen={this.state.collapsed}>
+              <Collapse className={ style.collapseWrapper } isOpen={this.state.collapsed && this.props.collapsed }>
                 <CardText>
                   <b>Players: </b>
                   { data.players }
                   </CardText>
                 <CardText>
                   <b>Map: </b>
-                  { data.map }
+                  { data.version }
                   </CardText>
                 <CardText>
                   <b>Description: </b>
